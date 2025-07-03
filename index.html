@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0;url=https://example.com" />
     <script>
       const links = [
         "https://open.spotify.com/track/SONG_ID_1",
         "https://youtube.com/watch?v=VIDEO_ID_2",
         "https://music.apple.com/song/SONG_ID_3"
       ];
-      const choice = links[Math.floor(Math.random() * links.length)];
-      window.location.href = choice;
+
+      // Get current index from localStorage or start at 0
+      let index = parseInt(localStorage.getItem("redirectIndex")) || 0;
+
+      // Redirect to the current link
+      window.location.href = links[index];
+
+      // Update the index for next time (loop back to 0 if at end)
+      index = (index + 1) % links.length;
+      localStorage.setItem("redirectIndex", index);
     </script>
   </head>
   <body>
-    <p>Redirecting you to a surprise song...</p>
+    <p>Redirecting to the next song in order...</p>
   </body>
 </html>
