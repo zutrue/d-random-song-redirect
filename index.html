@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting...</title>
     <script>
+      // Your list of song URLs
       const links = [
         "https://open.spotify.com/track/SONG_ID_1",
         "https://youtube.com/watch?v=VIDEO_ID_2",
         "https://music.apple.com/song/SONG_ID_3"
       ];
 
-      // Get current index from localStorage or start at 0
-      let index = parseInt(localStorage.getItem("redirectIndex")) || 0;
+      // Get current index from localStorage, default to 0
+      let index = parseInt(localStorage.getItem("redirectIndex") || "0", 10);
 
       // Redirect to the current link
       window.location.href = links[index];
 
-      // Update the index for next time (loop back to 0 if at end)
-      index = (index + 1) % links.length;
-      localStorage.setItem("redirectIndex", index);
+      // Update index for next time (loop back to 0 if at the end)
+      const nextIndex = (index + 1) % links.length;
+      localStorage.setItem("redirectIndex", nextIndex);
     </script>
   </head>
   <body>
-    <p>Redirecting to the next song in order...</p>
+    <p>Redirecting to your next song...</p>
   </body>
 </html>
